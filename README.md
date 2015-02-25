@@ -68,12 +68,14 @@ R-CNN bbox reg | 31.4%
   0. You'll be prompted to download the [Selective Search](http://disi.unitn.it/~uijlings/MyHomepage/index.php#page=projects1) code, which we cannot redistribute. Afterwards, you should see the message `R-CNN startup done` followed by the MATLAB prompt `>>`.
   0. Run the build script: `>> rcnn_build()` (builds [liblinear](http://www.csie.ntu.edu.tw/~cjlin/liblinear/) and [Selective Search](http://www.science.uva.nl/research/publications/2013/UijlingsIJCV2013/)). Don't worry if you see compiler warnings while building liblinear, this is normal on my system.
   0. Check that Caffe and MATLAB wrapper are set up correctly (this code should run without error): `>> key = caffe('get_init_key');` (expected output is key = -2)
+  0. Set the path to Selective Search using Matlab script: addpath(genpath('rcnn/selective_search/SelectiveSearchCodeIJCV')).
   0. Download the model package, which includes precompute models (see below).
 
 **Common issues:** You may need to set an `LD_LIBRARY_PATH` before you start MATLAB. If you see a message like "Invalid MEX-file '/path/to/rcnn/external/caffe/matlab/caffe/caffe.mexa64': libmkl_rt.so: cannot open shared object file: No such file or directory" then make sure that CUDA and MKL are in your `LD_LIBRARY_PATH`. On my system, I use:
 
     export LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:/usr/local/cuda/lib64
   
+**Common issues:**  See a message like "... libstdc++.so.6: version `GLIBCXX_3.4.15' not found (required by */*.mexa64)" The way I solve it is to first locate libstdc++.so.6 (in my case, it's under /usr/lib/i386-linux-gnu/), and copy that file to MATLAB/R2012b/bin/glnxa64/.
 
 ### Downloading pre-computed models (the model package)
 
